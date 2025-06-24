@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>溫馨叮嚀知識圖卡</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', 'PingFang TC', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card-container {
+            width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .main-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .heart-decoration {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 30%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff9a9e;
+            position: relative;
+        }
+        
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2d3748;
+            margin: 0;
+            text-align: justify;
+        }
+        
+        .quote-mark {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 40px;
+            color: #ff9a9e;
+            opacity: 0.7;
+            font-family: serif;
+        }
+        
+        .steps-section {
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-card:nth-child(1) {
+            border-left-color: #ff6b6b;
+            background: linear-gradient(135deg, #fff5f5 0%, #white 100%);
+        }
+        
+        .step-card:nth-child(2) {
+            border-left-color: #4ecdc4;
+            background: linear-gradient(135deg, #f0fdfa 0%, #white 100%);
+        }
+        
+        .step-card:nth-child(3) {
+            border-left-color: #45b7d1;
+            background: linear-gradient(135deg, #f0f9ff 0%, #white 100%);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+        
+        .step-card:nth-child(1) .step-number {
+            background: #ff6b6b;
+        }
+        
+        .step-card:nth-child(2) .step-number {
+            background: #4ecdc4;
+        }
+        
+        .step-card:nth-child(3) .step-number {
+            background: #45b7d1;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        
+        .step-content {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .reminder-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .reminder-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .reminder-text {
+            font-size: 16px;
+            color: #2d3748;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .closing-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .closing-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .closing-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .signature {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: right;
+            margin-top: 20px;
+            border-top: 3px solid #e2e8f0;
+        }
+        
+        .signature-text {
+            font-size: 16px;
+            color: #667eea;
+            font-weight: bold;
+            margin: 0;
+            font-style: italic;
+        }
+        
+        .decorative-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .love-icon {
+            display: inline-block;
+            margin: 0 5px;
+            color: #ff6b9d;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card-header">
+            <div class="decorative-dots"></div>
+            <div class="heart-decoration">💝</div>
+            <h1 class="main-title">給阿芷的溫馨叮嚀</h1>
+            <p class="subtitle">北京十四天征程 · 成長與蛻變之旅</p>
+        </div>
+        
+        <div class="content">
+            <div class="intro-section">
+                <div class="quote-mark">"</div>
+                <p class="intro-text">
+                    阿芷聽好了——昨晚我幫你把機票、住宿、網卡一路敲定到凌晨兩點半，家永遠是你的後援；但這次出發，你得用行動證明自己撐得起舞台，也撐得起責任。
+                </p>
+            </div>
+            
+            <div class="steps-section">
+                <h2 class="section-title">每日自律三步驟 <span class="love-icon">💜</span> 寫在心上</h2>
+                
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-title">提早十分鐘到場</div>
+                        <div class="step-content">遲到這壞習慣，就留在台灣。準時是對自己和他人的基本尊重，也是專業態度的體現。</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">事先三步檢查</div>
+                        <div class="step-content">行程、道具、心態，一件不漏。充分的準備是成功的一半，細心檢查能避免臨時出錯。</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">排練完深呼吸</div>
+                        <div class="step-content">沉澱情緒，再上下一個場。保持冷靜與專注，每一次演出都是新的開始。</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reminder-section">
+                <h3 class="reminder-title">貼心提醒 <span class="love-icon">🌟</span></h3>
+                <p class="reminder-text">
+                    北京這十四天，請每天傳訊息報平安與進度；遇到卡關，隨時呼叫，安全網在這頭。但記住：自律才是藝術最深的底色。
+                </p>
+            </div>
+            
+            <div class="closing-section">
+                <p class="closing-text">
+                    脫胎換骨，從現在開始<br>
+                    讓我看到你「說到就做到」的實力 <span class="love-icon">✨</span>
+                </p>
+            </div>
+            
+            <div class="signature">
+                <p class="signature-text">月亮紅蛇的媽媽 <span class="love-icon">🌙🐍</span> 叮嚀</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
